@@ -29,8 +29,10 @@ metadata:
 spec:
   selector:
     app: backend
+  type: NodePort
   ports:
     - protocol: TCP
       port: 5000
       targetPort: 5000
-  type: NodePort
+      nodePort: 32524
+
