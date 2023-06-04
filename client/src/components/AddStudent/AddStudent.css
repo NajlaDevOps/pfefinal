@@ -12,7 +12,7 @@
   font-size: 14px;
   line-height: 1.5;
   color: rgba(0,0,0,.65);
-  background-color: #fff;
+  background-color: #FADADD;
   border: 1px solid #FFC0CB;
   border-radius: 4px;
   outline: none;
@@ -21,7 +21,7 @@
 .Add-Student-Submit, .Add-Student-Reset {
   width: 45px;
   height: 40px;
-  color: #fff;
+  color: #FADADD;
   border: none;
   margin-left: 18px;
   border-radius: 2px;
@@ -30,7 +30,7 @@
 }
 
 .Add-Student-Submit {
-  background-color: #6200ea;
+  background-color: #FADADD;
 }
 
 .Add-Student-Reset {
