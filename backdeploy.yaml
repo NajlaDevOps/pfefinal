@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: backend
-          image: najlaha/backend-image:__BACKEND_IMAGE_TAG__
+          image: najlaha/backend-image
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
 
