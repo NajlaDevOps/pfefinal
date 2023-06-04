@@ -30,9 +30,9 @@ metadata:
 spec:
   selector:
     app: frontend
+   type: NodePort
   ports:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-  type: NodePort
-
+      nodePort: 30722
