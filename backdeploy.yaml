@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: najlaha/students:1
+          image: najlaha/backend-image:__BACKEND_IMAGE_TAG__
           ports:
             - containerPort: 5000
 
