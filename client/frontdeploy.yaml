@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: najlaha/students:2
+          image: __IMAGE_NAME__:__IMAGE_TAG__
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
 
