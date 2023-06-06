@@ -45,7 +45,7 @@ pipeline {
       }
     }
     
-    stage('Docker Remove Image') {
+    stage('Docker Remove backend Image') {
       steps {
         sh "docker rmi ${backendImageName}:${backendImageTag}"
       }
@@ -70,7 +70,7 @@ pipeline {
       }
     }
     
-    stage('Docker Remove Image') {
+    stage('Docker Remove  frontend Image') {
       steps {
         sh "docker rmi ${frontendImageName}:${frontendImageTag}"
       }
