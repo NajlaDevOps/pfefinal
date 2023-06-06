@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-    stage('Run Tests') {
+    stage('Run Backend Tests') {
             steps {
                 sh 'npm test'
             }
@@ -45,12 +45,12 @@ pipeline {
       }
     }
     
-    stage('Docker Remove backend Image') {
+    stage('Docker Remove  backend Image') {
       steps {
         sh "docker rmi ${backendImageName}:${backendImageTag}"
       }
     }
-    stage('Build frontend Docker Image') {
+     stage('Build frontend Docker Image') {
       steps {
         dir('client') {
           script {
@@ -59,7 +59,8 @@ pipeline {
         }
       }
     }
-     stage('Push frontend Docker Image') {
+
+    stage('Push frontend Docker Image') {
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'Dockerbub-credential', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
@@ -70,29 +71,27 @@ pipeline {
       }
     }
     
-    stage('Docker Remove  frontend Image') {
+    stage('Docker Remove frontend Image') {
       steps {
         sh "docker rmi ${frontendImageName}:${frontendImageTag}"
       }
     }
-
+    
    stage('Deploying App to Kubernetes') {
       steps {
          script {
            sh "sed -i 's|__IMAGE_NAME__|${backendImageName}|g; s|__IMAGE_TAG__|${backendImageTag}|g' backdeploy.yaml"
             kubernetesDeploy(configs: "backdeploy.yaml", kubeconfigId: "k8s-id", withLatestTag: true)
              }
-             dir('client') {
+         dir('client') {
           script {
             sh "sed -i 's|__IMAGE_NAME__|${frontendImageName}|g; s|__IMAGE_TAG__|${frontendImageTag}|g' frontdeploy.yaml"
             kubernetesDeploy(configs: "frontdeploy.yaml", kubeconfigId: "k8s-id", withLatestTag: true)
-                }
-            }
-
+          }
         }
-   }
+    }
    
  
+  }
 }
 }
-
