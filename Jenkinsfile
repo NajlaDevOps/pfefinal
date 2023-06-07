@@ -14,17 +14,18 @@ pipeline {
         git 'https://github.com/NajlaDevOps/pfefinal.git'
       }
     }
+
     stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
+      steps {
+        sh 'npm install'
+      }
+    }
 
     stage('Run Backend Tests') {
-            steps {
-                sh 'npm test'
-            }
-        }
+      steps {
+        sh 'npm test'
+      }
+    }
 
     stage('Build Backend Docker Image') {
       steps {
@@ -44,8 +45,8 @@ pipeline {
         }
       }
     }
-    
-    stage('Docker Remove  backend Image') {
+
+    stage('Docker Remove Backend Image') {
       steps {
         sh "docker rmi ${backendImageName}:${backendImageTag}"
       }
@@ -76,22 +77,37 @@ pipeline {
         sh "docker rmi ${frontendImageName}:${frontendImageTag}"
       }
     }
-    
-   stage('Deploying App to Kubernetes') {
+
+    stage('Deploying App to Kubernetes') {
       steps {
-         script {
-           sh "sed -i 's|__IMAGE_NAME__|${backendImageName}|g; s|__IMAGE_TAG__|${backendImageTag}|g' backdeploy.yaml"
-            kubernetesDeploy(configs: "backdeploy.yaml", kubeconfigId: "k8s-id", withLatestTag: true)
-             }
-         dir('client') {
+        script {
+          sh "sed -i 's|__IMAGE_NAME__|${backendImageName}|g; s|__IMAGE_TAG__|${backendImageTag}|g' backdeploy.yaml"
+          kubernetesDeploy(configs: "backdeploy.yaml", kubeconfigId: "k8s-id", withLatestTag: true)
+        }
+        dir('client') {
           script {
             sh "sed -i 's|__IMAGE_NAME__|${frontendImageName}|g; s|__IMAGE_TAG__|${frontendImageTag}|g' frontdeploy.yaml"
             kubernetesDeploy(configs: "frontdeploy.yaml", kubeconfigId: "k8s-id", withLatestTag: true)
           }
         }
+        
+      }
     }
-   
- 
+  }
+
+   post {
+    always {
+      script {
+        def pipelineStatus = currentBuild.result
+        def emailBody = pipelineStatus == 'SUCCESS' ? "La pipeline CI/CD a été exécutée avec succès." : "La pipeline CI/CD a été exécutée en échec."
+        emailext subject: "Rapport d'exécution de la pipeline CI/CD",
+                  body: emailBody,
+                  to: "hajjinajla814@gmail.com",
+                  attachLog: true
+      }
+    }
   }
 }
-}
+
+
+
