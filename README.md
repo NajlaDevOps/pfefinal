@@ -5,7 +5,7 @@ This is a simple crud project for beginners built with the following technologie
 - [Express](http://expressjs.com/) and [Mongoose](http://mongoosejs.com/) for the backend
 
 
-## Requirements
+## # Requirements
 
 - [Node.js](https://nodejs.org/en/) 10+
 
