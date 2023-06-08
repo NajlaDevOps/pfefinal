@@ -2,7 +2,7 @@
 
 This is a simple crud project for beginners built with the following technologies:"ya rabbi sidi sahhel"
 - [React](https://facebook.github.io/react/) and [React Router](https://reacttraining.com/react-router/) for the frontend
-- [Express](http://expressjs.com/) and [Mongoose](http://mongoosejs.com/) for the backend
+- [Express](http://expressjs.com/) and [Mongoose](http://mongoosejs.com/) for the backend .
 
  ######3 Requirements
 
