@@ -83,8 +83,6 @@ pipeline {
         script {
           kubernetesDeploy(configs: "mongodeploy.yaml", kubeconfigId: "k8s-id", withLatestTag: true)
         }
-
-
         script {
           sh "sed -i 's|__IMAGE_NAME__|${backendImageName}|g; s|__IMAGE_TAG__|${backendImageTag}|g' backdeploy.yaml"
           kubernetesDeploy(configs: "backdeploy.yaml", kubeconfigId: "k8s-id", withLatestTag: true)
