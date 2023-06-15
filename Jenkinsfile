@@ -2,7 +2,7 @@ pipeline {
   environment {
     backendImageName = "najlaha/testjenkins"
     backendImageTag = "${BUILD_NUMBER}"
-    frontendImageName = "najlaha/testjenkins"
+    frontendImageName = "najlaha/frontjenkins"
     frontendImageTag = "${BUILD_NUMBER}"
   }
 
