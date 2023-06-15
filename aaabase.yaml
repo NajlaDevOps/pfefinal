@@ -19,7 +19,6 @@ spec:
           image:  mongo
           ports:
             - containerPort: 27017
-
 ---
 
 apiVersion: v1
