@@ -75,6 +75,7 @@ class AddStudent extends Component {
           />
           <button type="submit" className="Add-Student-Submit fa fa-plus"></button>
           <button type="reset" className="Add-Student-Reset fa fa-refresh"></button>
+          <button type="reset" className="Add-Student-Reset fa fa-refresh"></button>
         </form>
         <ToastContainer />
       </div>
